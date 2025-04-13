@@ -1,3 +1,5 @@
 langchain-cerebras
+langchain
+langchain-openai
 pydantic
 dotenv
