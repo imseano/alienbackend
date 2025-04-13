@@ -11,7 +11,7 @@ A backend for First Encounter game for FullyHacks 2025. Frontend: [FullyHacks](h
 3. run 'uvicorn main:app' in src/ and access the API at http://localhost:8000
 
 
-## API Endpointsy
+## API Endpoints
 
 ### POST /new_session
 
@@ -24,6 +24,36 @@ Request Body
 }
 ```
 
+Response
+```
+{
+  "message": "Session created",
+  "starting_words": ["hello", "friend"]
+}
+```
+### POST /teach
+
+Adds a new word to the alien's vocabulary.
+Request Body
+```
+{
+  "game_id": "your-session-id",
+  "word": "peace"
+}
+```
+Response
+```
+["hello", "friend", "peace"]
+```
+### POST /new_session
+
+Creates a new alien session with default settings.
+Request Body
+```
+{
+  "game_id": "new-session-id"
+}
+```
 Response
 ```
 {
