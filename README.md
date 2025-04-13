@@ -43,23 +43,24 @@ Adds a new word to the alien's vocabulary.
 #### Response
 ```
 {
-   "word-list": "words"
+   "message": "Alien learned a new word, peace!",
+   "remaining_bat": "20"
 }
 ```
-### POST /new_session
+### POST /start_game
 
 Creates a new alien session with default settings.
 #### Request Body
 ```
 {
-  "game_id": "new-session-id"
+  "use_random": "bool"
 }
 ```
 #### Response
 ```
 {
-  "message": "Session created",
-  "starting_words": ["hello", "friend"]
+  "message": "Game started successfully",
+  "game_id": "new-session-id"
 }
 ```
 ### POST /end_game
