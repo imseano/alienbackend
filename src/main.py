@@ -1,16 +1,7 @@
-import os
 import json
-from typing import List
-from langchain_cerebras import ChatCerebras
-from pydantic import SecretStr, BaseModel, Field
+import re
 from alien import Alien, build_internal_prompt
-from dotenv import load_dotenv
 from llmclient import Cerebras
-
-load_dotenv()
-
-api_key = os.environ.get("CEREBRAS_API_KEY")
-safe_api = SecretStr(api_key) if api_key else None
 
 client = Cerebras().client 
 known_words = ["yes", "no", "you", "me", "help", "danger", "safe", "friend", "enemy"]
@@ -19,14 +10,6 @@ known_words = ["yes", "no", "you", "me", "help", "danger", "safe", "friend", "en
 robert = Alien(known_words, "funny", "destroy Earth", client)
 
 robert_prompt = build_internal_prompt("Why are you here?", robert)
-
-class AlienResponse(BaseModel):
-    reasoning: str = Field(description="Reasoning for the response.")
-    new_fear: float = Field(description="New fear level after the response.")
-    response: str = Field(description="The response.")
-
-structured_llm = client.with_structured_output(AlienResponse)
-
 messages=[
         (
             "user",
@@ -34,16 +17,21 @@ messages=[
         ),
 ]
 
-try:
 
-    reply = structured_llm.invoke(robert_prompt)
-except Exception as e:
-    print("Structured call failed, falling back to manual parsing.")
-    reply = client.invoke(robert_prompt)
+reply = client.invoke(robert_prompt)
 
-print(reply.content)
+def extract_json_from_text(text: str):
+    try:
+        # Match the first full JSON object in the text
+        json_match = re.search(r"\{.*?\}", text, re.DOTALL)
+        if json_match:
+            return json.loads(json_match.group(0))
+    except json.JSONDecodeError as e:
+        print("JSON decode error:", e)
+    return None
 
-# Parse JSON response from LLM
-#parsed = json.loads(reply.content)
+json_data = extract_json_from_text(reply.content)
 
-#print(parsed)
+print(json_data)
+
+print(json_data['response'])
