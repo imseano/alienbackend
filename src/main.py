@@ -42,7 +42,7 @@ VOCABULARY_SETS = {
 }
 
 motives = ["You wish for an alliance with the Earth", "You wish to destroy countless worlds and conquer the universe", 
-           "You simply came to visit and have no other purpose", "You wish to spare the Earth but destroy the human race", "You wish for a peaceful coexistence", "You want to give a nice gift to the humans", "You want to give a terrible curse to the humans"]
+           "You simply came to visit and have no other purpose", "You wish to spare the Earth but destroy the human race", "You wish for a peaceful coexistence as humanity's rulers", "You want to give a nice gift to the humans", "You want to give a terrible curse to the humans"]
 
 d_known_words = ["yes", "no", "you", "me", "help", "danger", "safe", "friend", "enemy"]
 d_motive = "You wish to destroy countless worlds and conquer the universe"

@@ -2,11 +2,7 @@ langchain-cerebras
 langchain
 langchain-openai
 pydantic
-dotenv
+python-dotenv
 fastapi
 uvicorn
-json
-uuid
-re
-random
-time
+
