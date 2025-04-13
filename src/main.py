@@ -89,15 +89,13 @@ def ask_alien(game_id, message):
         try:
             # Match the first full JSON object in the text
            json_match = re.search(r"\{.*?\}", text, re.DOTALL)
-           if json_match:
+           if json_matchostileh:
             return json.loads(json_match.group(0))
         except json.JSONDecodeError as e:
             print("JSON decode error:", e)
         return None
 
     json_data = extract_json_from_text(reply.content)
-
-    #print(json_data)
 
     print(json_data['response'])
 
@@ -107,7 +105,6 @@ def ask_alien(game_id, message):
     system.add_history(json_data)
 
     system.save_to_json(game_id)
-
 
     return {"response": json_data['response'],
             "remaining_bat": system.remaining_bat
@@ -119,6 +116,9 @@ def teach_alien(game_id, word):
     alien = system.alien
     alien.learn_vocab(word)
     system.remaining_bat -= bat_reduction
+    system.history.append(f"Alien has learned the word: {word}")
+
+    system.save_to_json(game_id)
 
     return {"message": "Alien has learned the word: " + word,
             "remaining_bat": system.remaining_bat}
