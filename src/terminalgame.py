@@ -8,7 +8,7 @@ def main():
     print("Type messages to the alien. Type 'exit' to quit.")
     print("-" * 50)
 
-    game_id = start_game(True)
+    game_id = start_game(True)['game_id']
     print(f"[Session started: {game_id}]\nSay something to the alien...\n")
 
     while True:
@@ -46,7 +46,7 @@ def main():
                 end_game(game_id)
                 break
 
-            print("👽 Alien:", response)
+            print("👽 Alien:", response['response'])
             time.sleep(1)
 
         except Exception as e:
