@@ -42,7 +42,9 @@ Adds a new word to the alien's vocabulary.
 ```
 #### Response
 ```
-
+{
+   "word-list": "words"
+}
 ```
 ### POST /new_session
 
@@ -72,6 +74,6 @@ Deletes the session and returns game data.
 #### Response
 ```
 {
-   "
+   "game_data": "game-data"
 }
 ```
