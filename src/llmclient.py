@@ -14,4 +14,5 @@ class Cerebras:
        # This is the default and can be omitted
         api_key=safe_api,
         model="llama-4-scout-17b-16e-instruct",
+        temperature=0.7,
     )

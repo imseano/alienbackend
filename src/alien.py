@@ -1,4 +1,3 @@
-from langchain_cerebras import ChatCerebras
 
 class Alien:
     def __init__(self, known_words, personality, motive, llm):
@@ -13,7 +12,15 @@ class Alien:
         return self.llm.invoke(prompt)
 
     def learn_vocab(self, word):
-        known_words.append(word)
+        self.known_words.append(word)
+
+    def calculate_stress_change(self, emotion):
+        if emotion == "happy":
+            self.stress -= 5
+            if (self.stress < 0): self.stress = 0
+        elif emotion == "angry":
+            self.stress += 10
+
 
 
 
@@ -24,21 +31,22 @@ def build_internal_prompt(player_input: str, state: Alien) -> str:
 
     Your personality is: {state.personality}
     Your motive is: {state.motive}
-    Your current fear level is: {state.stress:.2f}
+    Your current stress level is: {state.stress:.2f}. If the human says something that makes you angry, your stress level will increase by up to 10.
+    If your stress is 50 or more, you will say something random in anger. If the human says something that makes you happy, your stress level will decrease by up to 5.
 
     The human said: "{player_input}"
 
     Decide:
     1. What you are thinking.
-    2. How your fear level changes.
-    3. What word(s) to say from your vocabulary.
+    2. Which emotion in one word did you feel?
+    3. What word(s) to say from your vocabulary and what body cues do you use.
 
     Reply **only** in JSON format like this (do not add commentary or explanation):
 
     {{
       "reasoning": "<what you're thinking and why>",
-      "new_fear": <new fear level as a float>,
-      "response": "<your chosen word(s) from the vocabulary in string form>"
+      "main_emotion": <happy|angry|neutral|etc>,
+      "response": "<your chosen word(s) from the vocabulary in string form alongside any body cues>"
     }}
     """ 
 
