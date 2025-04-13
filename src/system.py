@@ -16,7 +16,7 @@ class System:
         self.remaining_bat = remaining_bat
 
         self.alien = Alien(self.known_words, self.personality, self.motive, Cerebras().client)
-        self.player = Player(self.remaining_bat)
+        self.player = Player(self.remaining_bat, self.alien)
 
 
 

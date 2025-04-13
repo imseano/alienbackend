@@ -2,7 +2,6 @@ import json
 import uuid
 import re
 from system import System, Session
-from alien import Alien, build_internal_prompt
 
 known_words = ["yes", "no", "you", "me", "help", "danger", "safe", "friend", "enemy"]
 motive = "destroy Earth"
@@ -49,14 +48,11 @@ def ask_alien(game_id, message):
 
     return json_data
 
+def teach_alien(game_id, word):
+    pass
+
 def end_game(game_id):
     final_data = Session(game_id).load_session_file().to_dict()
     Session(game_id).delete_session_file()
     print(final_data)
     return final_data
-        
-
-
-"""
-
-"""
