@@ -46,10 +46,16 @@ def ask_alien(game_id, message):
 
     system.save_to_json(game_id)
 
-    return json_data
+    if (system.remaining_bat <= 0):
+        return "__END__"
+
+    return json_data['response']
 
 def teach_alien(game_id, word):
     pass
+
+def get_session_data(game_id):
+    return Session(game_id).load_session_file().to_dict()
 
 def end_game(game_id):
     final_data = Session(game_id).load_session_file().to_dict()

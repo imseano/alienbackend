@@ -12,6 +12,10 @@ class Alien:
         prompt = build_internal_prompt(message, self)
         return self.llm.invoke(prompt)
 
+    def learn_vocab(self, word):
+        known_words.append(word)
+
+
 
 def build_internal_prompt(player_input: str, state: Alien) -> str:
     return f"""
