@@ -89,7 +89,7 @@ def ask_alien(game_id, message):
         try:
             # Match the first full JSON object in the text
            json_match = re.search(r"\{.*?\}", text, re.DOTALL)
-           if json_matchostileh:
+           if json_match:
             return json.loads(json_match.group(0))
         except json.JSONDecodeError as e:
             print("JSON decode error:", e)
