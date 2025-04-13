@@ -77,8 +77,15 @@ def start_game(use_random: bool = True):
     Session(game_id).create_session_file(system)
     return {"message": "Game started successfully", "game_id": game_id}
 
+class MessageClass(BaseModel):
+    game_id: str
+    message: str
+
 @app.post("/ask")
-def ask_alien(game_id, message):
+def ask_alien(payload: MessageClass):
+    game_id = payload.game_id
+    message = payload.message
+
     system = Session(game_id).load_session_file()
 
     alien = system.alien
@@ -110,8 +117,15 @@ def ask_alien(game_id, message):
             "remaining_bat": system.remaining_bat
             }
 
+class TeachClass(BaseModel):
+    game_id: str
+    word: str
+
 @app.post("/teach")
-def teach_alien(game_id, word):
+def teach_alien(payload: TeachClass):
+    game_id = payload.game_id
+    word = payload.word
+
     system = Session(game_id).load_session_file()
     alien = system.alien
     alien.learn_vocab(word)
