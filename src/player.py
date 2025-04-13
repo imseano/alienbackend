@@ -1,4 +1,10 @@
+import system
+
 class Player:
-    def __init__(self):
+    def __init__(self, battery):
         self.name = "Player"
-        self.battery = 100
+        self.battery = battery
+
+    def send_ask(self, message):
+
+        return message
