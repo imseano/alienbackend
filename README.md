@@ -1,5 +1,5 @@
 # AlienBackend
-A backend for First Encounter game for FullyHacks 2025.
+A backend for First Encounter game for FullyHacks 2025. Frontend: [https://github.com/EdwardCValencia/FullyHacks](FullyHacks)
 
 ## Software Requirements
 Python 3.13
