@@ -1,9 +1,8 @@
 import json
 import uuid
 import re
-from system import System, Session, get_session_file
+from system import System, Session
 from alien import Alien, build_internal_prompt
-from llmclient import Cerebras
 
 known_words = ["yes", "no", "you", "me", "help", "danger", "safe", "friend", "enemy"]
 motive = "destroy Earth"
@@ -24,9 +23,7 @@ def ask_alien(game_id, message):
 
     alien = system.alien
 
-    alien_prompt = build_internal_prompt(message, alien)
-
-    reply = alien.llm.invoke(alien_prompt)
+    reply = alien.generate_response(message)
 
     def extract_json_from_text(text: str):
         try:

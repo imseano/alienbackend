@@ -8,6 +8,10 @@ class Alien:
         self.stress = 0
         self.llm = llm
 
+    def generate_response(self, message):
+        prompt = build_internal_prompt(message, self)
+        return self.llm.invoke(prompt)
+
 
 def build_internal_prompt(player_input: str, state: Alien) -> str:
     return f"""
