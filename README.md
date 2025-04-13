@@ -13,51 +13,65 @@ A backend for First Encounter game for FullyHacks 2025. Frontend: [FullyHacks](h
 
 ## API Endpoints
 
-### POST /new_session
+### POST /ask
 
-Creates a new alien session with default settings.
-Request Body
-
+Sends a message to the alien and gets a JSON-formatted response.
+#### Request Body
 ```
 {
-  "game_id": "new-session-id"
+  "game_id": "your-session-id",
+  "message": "hello"
 }
 ```
-
-Response
+#### Response
 ```
 {
-  "message": "Session created",
-  "starting_words": ["hello", "friend"]
+  "response": "friend",           // Alien's chosen word(s)
+  "remaining_battery": 85         // Battery left
 }
 ```
 ### POST /teach
 
 Adds a new word to the alien's vocabulary.
-Request Body
+#### Request Body
 ```
 {
   "game_id": "your-session-id",
   "word": "peace"
 }
 ```
-Response
+#### Response
 ```
-["hello", "friend", "peace"]
+
 ```
 ### POST /new_session
 
 Creates a new alien session with default settings.
-Request Body
+#### Request Body
 ```
 {
   "game_id": "new-session-id"
 }
 ```
-Response
+#### Response
 ```
 {
   "message": "Session created",
   "starting_words": ["hello", "friend"]
+}
+```
+### POST /end_game
+
+Deletes the session and returns game data.
+#### Request Body
+```
+{
+   "game_id": "session-id"
+}
+```
+#### Response
+```
+{
+   "
 }
 ```
